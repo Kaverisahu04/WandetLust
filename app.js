@@ -30,9 +30,9 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")))
 
-app.get("/", (req, res) => {
-  res.send("Hi, I am root");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hi, I am root");
+// });
 
 const validateListing = (req, res, next) => {
    let {error} = listingSchema.validate(req.body);
@@ -111,7 +111,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 //   res.send("successful testing");
 // });
 
-app.all("*", (req, res, next)=>{
+app.all("/{*any}", (req, res, next)=>{
   next(new ExpressError(404, "Page Not Found!"))
 })
 
